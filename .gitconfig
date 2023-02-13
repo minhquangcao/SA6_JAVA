@@ -1,0 +1,5 @@
+[core]
+    editor = code --wait
+[user]
+name = Thibault Stanislas
+email = thibault.stanislas@etu.univ-lyon1.fr

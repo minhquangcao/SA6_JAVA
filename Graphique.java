@@ -2,46 +2,56 @@ import java.awt.*;
 import java.time.Instant;
 public class Graphique extends Canvas{
 	
-	int tableau[][]= new int [40][40];
-	
-	VoitureAutonome TabVoiture [] = new VoitureAutonome [4];
 
-	public void init(Graphique g)
-	// initialisation
-	{
-		for (int i=0;i<40;i++){
-			for(int j=0;j<40;j++)
-			{
-				tableau[i][j]=0;
-			}
-		}
-		for( int j=0 ;j<4;j++){TabVoiture[j] = new VoitureAutonome();}
-		
-	}
-	public void initRoute(){
-		for (int i=0;i<40;i++){
-			for(int j=0;j<40;j++){
-				if(i==15||i==16||i==30||i==31){tableau[i][j]=1;}
-				if(j==15||j==16||j==30||j==31){tableau[i][j]=1;}
-			}
-	}
-}
+	int tableau[][]={  
+		{ 1, 1, 4, 3, 0, 0, 3, 1 , 4, 1, 1, 3, 0, 0, 3, 4, 4, 1 },
+		{ 1, 1, 1, 3, 0, 0, 3, 4, 1, 4, 1, 3, 0, 0, 3, 4, 1, 1 },
+		{ 3, 3, 3, 3, 0, 0, 3, 3 , 3, 3, 3, 3, 0, 0, 3, 3, 3, 3 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+		{ 3, 3, 3, 3, 0, 0, 3, 3 , 3, 3, 3, 3, 0, 0, 3, 3, 3, 3 },
+		{ 4, 1, 1, 3, 0, 0, 3, 1 , 1, 1, 1, 3, 0, 0, 3, 1, 1, 4 },
+		{ 1, 1, 4, 3, 0, 0, 3, 1 , 4, 4, 1, 3, 0, 0, 3, 1, 4, 1 },
+		{ 3, 3, 3, 3, 0, 0, 3, 3 , 3, 3, 3, 3, 0, 0, 3, 3, 3, 3 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+		{ 3, 3, 3, 3, 0, 0, 3, 3 , 3, 3, 3, 3, 0, 0, 3, 3, 3, 3 },
+		{ 1, 4, 1, 3, 0, 0, 3, 4 , 1, 1, 1, 3, 0, 0, 3, 1, 1, 1 },
+		{ 3, 3, 3, 3, 0, 0, 3, 1 , 1, 4, 1, 3, 0, 0, 3, 1, 1, 1 },
+		{ 0, 0, 0, 0, 0, 0, 3, 1 , 1, 1, 1, 3, 0, 0, 3, 1, 4, 1 },
+		{ 0, 0, 0, 0, 0, 0, 3, 4 , 1, 1, 4, 3, 0, 0, 3, 1, 4, 1 },
+		{ 3, 3, 3, 3, 0, 0, 3, 1 , 1, 1, 1, 3, 0, 0, 3, 1, 1, 4 },};
 	
+	
+
 	public void paint(Graphics g) {
 		Toolkit t=Toolkit.getDefaultToolkit();
-		Image noir=t.getImage("noir.jpg");
-		Image gris=t.getImage("gris.jpg");
-		Image voiture=t.getImage("voiture.png");
+		Image herbe=t.getImage("herbe.jpg");
+		Image troitoire=t.getImage("bordure.jpg");
+		Image route=t.getImage("route.jpg");
+		Image voiture=t.getImage("voiture.jpg");
+		Image arbre=t.getImage("arbre.png");
 		
-		for ( int k=0 ; k<=39 ; k++){   //x 18
-			for ( int l=0 ; l<=39 ; l++){  //y 17
+		for ( int k=0 ; k<=18 ; k++){   //x 18
+			for ( int l=0 ; l<=16 ; l++){  //y 18
 				if (tableau[l][k]== 0){
-					g.drawImage(gris,10*k,10*l,this);
+					g.drawImage(route,50*k,50*l,this);
 				}
 				if (tableau[l][k]== 1){
-					g.drawImage(noir,10*k,10*l,this);
+					g.drawImage(herbe,50*k,50*l,this);
 				
 				}
+				if (tableau[l][k]== 2){
+					g.drawImage(voiture,50*k,50*l,this);
+				}
+				if (tableau[l][k]== 3){
+					g.drawImage(troitoire,50*k,50*l,this);
+				}
+				
+				if (tableau[l][k]== 4){
+					g.drawImage(arbre,50*k,50*l,this);
+				}
+			
 			}
 		}		
 		for(int i=0;i<4;i++)
@@ -57,33 +67,42 @@ public class Graphique extends Canvas{
 		}
 	}
 
-	public void changement(Graphique  g,int a)
+
+	public void deplacementE(Graphique  g,int a1,int b1 )
 	{
-		g.tableau[a][a]=1; // ce qui permet de changer les parametre
+		
+		g.tableau[a1][b1]=2; 
+		g.tableau[a1][b1-1]=0;
 	}
-	
+	public void deplacementO(Graphique  g,int a2,int b2 )
+	{
+		
+		g.tableau[a2][b2]=2; 
+		g.tableau[a2][b2+1]=0;
+	}
+
+	public void deplacementS(Graphique  g,int a3,int b3 )
+	{
+		
+		g.tableau[a3][b3]=2; 
+		g.tableau[a3-1][b3]=0;
+	}
+
+	public void deplacementN(Graphique  g,int a4,int b4 )
+	{
+		
+		g.tableau[a4][b4]=2; 
+		g.tableau[a4+1][b4]=0;
+	}	
 
 	public static Instant addition(Instant now)
 	//fonction qui permet d'additioner le temp
 	{
 		Instant instant2 = now.plusSeconds(1);
+		Instant instant2 = now.plusSeconds(1);
 		return instant2;
 	}
 	
-	public static void affichageNum(Graphique m)
-	// procedure pour un affichage texte pour effectuer des tests
-	{
-		for (int i=0;i<10;i++){
-			for(int j=0;j<10;j++)
-			{
-				System.out.print(m.tableau[j][i]);
-				if(j==9) System.out.print("\n");
-			}
-		}
-	}
-
-
-
 
 
 }

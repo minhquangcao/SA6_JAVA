@@ -7,18 +7,25 @@ public class Main extends Graphique{
 
     public static void main(String[] args) {
         Graphique m=new Graphique();
-        m.init(m);
-        m.initRoute();
-       
         JFrame f=new JFrame();
-        int a = 0;
+        int a1 = 4;                 //position de la voiture 1 (pour les tests)
+        int b1 = 1;
+
+        int a2 = 3;
+        int b2 = 15;
+        
+        int a3 = 1;
+        int b3 = 4;
+        
+        int a4 = 15;
+        int b4 = 13;
+    
         Instant now = Instant.now();
         f.add(m);
-        f.setSize(550,550);
+        f.setSize(920,900);         //format de la fenêtre
         f.setVisible(true);
-        while(a<30)
+        while(b1<=16)
         {
-            //f.add(m);
             if(Instant.now().isBefore(addition(now))){ 
                 //on affiche un nouveau carré noir chaque 1 seconde. 
 
@@ -35,10 +42,31 @@ public class Main extends Graphique{
             }
             else {
             //System.out.print("C'est Bon \n");	
-            m.DeplacementGeneral();
             
-            //m.changement(m, a);//appel a la fonction qui change les parametre dans le tableau
-            a++;//incrementation du compteur
+            
+            m.deplacementE(m, a1,b1);   // fonction deplacement vers l'Est 
+            m.deplacementO(m, a2,b2);
+            m.deplacementS(m, a3,b3);
+            m.deplacementN(m, a4,b4);
+            //m.maj(m,a2,b2);
+            
+            if (b1<=16){
+                b1++;                   //deplacement sur l'axe y
+            }
+            
+            if (b2>=1){
+                b2--;    
+            }
+
+            if (a3<=15){
+                a3++;    
+            }
+            
+            if (a4>=1){
+                a4--;    
+            }
+
+            //incrementation du compteur
             f.add(m);//ce qui permet d'actualiser le buffer
             f.repaint();//actualise l'affichage
             now = Instant.now();// réinitialise le temps
