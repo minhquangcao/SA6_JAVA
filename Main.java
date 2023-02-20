@@ -8,13 +8,15 @@ public class Main extends Graphique{
     public static void main(String[] args) {
         Graphique m=new Graphique();
         m.init(m);
+        m.initRoute();
+       
         JFrame f=new JFrame();
         int a = 0;
         Instant now = Instant.now();
         f.add(m);
         f.setSize(550,550);
         f.setVisible(true);
-        while(a<10)
+        while(a<30)
         {
             //f.add(m);
             if(Instant.now().isBefore(addition(now))){ 
@@ -33,7 +35,9 @@ public class Main extends Graphique{
             }
             else {
             //System.out.print("C'est Bon \n");	
-            m.changement(m, a);//appel a la fonction qui change les parametre dans le tableau
+            m.DeplacementGeneral();
+            
+            //m.changement(m, a);//appel a la fonction qui change les parametre dans le tableau
             a++;//incrementation du compteur
             f.add(m);//ce qui permet d'actualiser le buffer
             f.repaint();//actualise l'affichage
