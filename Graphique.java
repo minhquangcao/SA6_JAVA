@@ -48,7 +48,7 @@ public class Graphique extends Canvas{
 	public static Instant addition(Instant now)
 	//fonction qui permet d'additioner le temp
 	{
-		Instant instant2 = now.plusSeconds(4);
+		Instant instant2 = now.plusSeconds(1);
 		return instant2;
 	}
 	
