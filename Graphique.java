@@ -31,9 +31,9 @@ public class Graphique extends Canvas{
 	
 	public void paint(Graphics g) {
 		Toolkit t=Toolkit.getDefaultToolkit();
-		Image noir=t.getImage("noir.jpg");
-		Image gris=t.getImage("gris.jpg");
-		Image voiture=t.getImage("voiture.png");
+		Image noir=t.getImage("./photo/noir.jpg");
+		Image gris=t.getImage("./photo/gris.jpg");
+		Image voiture=t.getImage("./photo/voiture.png");
 		
 		for ( int k=0 ; k<=39 ; k++){   //x 18
 			for ( int l=0 ; l<=39 ; l++){  //y 17
@@ -90,8 +90,8 @@ public class Graphique extends Canvas{
 	public static void affichageNum(Graphique m)
 	// procedure pour un affichage texte pour effectuer des tests
 	{
-		for (int i=0;i<10;i++){
-			for(int j=0;j<10;j++)
+		for (int i=0;i<40;i++){
+			for(int j=0;j<40;j++)
 			{
 				System.out.print(m.tableau[j][i]);
 				if(j==9) System.out.print("\n");
