@@ -4,22 +4,35 @@ import java.util.Vector;
 
 public class VoitureAutonome {
     private Point position;
-    private Vector<Integer> direction;
+    private int direction;
     private int vitesse;
 
-    public VoitureAutonome()
-    {
-        this.vitesse = 1;
-        Random rand = new Random();
-        int nombreAleatoire = rand.nextInt(5); // Génère un nombre aléatoire entre 0 et 3
-        if (nombreAleatoire == 0){position = new Point(15,0); direction = new Vector<Integer>(1); direction.add(1);}
-        else if (nombreAleatoire == 1){position = new Point(30,0); direction = new Vector<Integer>(1); direction.add(1);}
-        else if (nombreAleatoire == 2){position = new Point(0,15); direction = new Vector<Integer>(1); direction.add(2);}
-        else {position = new Point(0,30); direction = new Vector<Integer>(1); direction.add(1);}
-        
-        
-    }
-    public VoitureAutonome(int x, int y, Vector<Integer> direction, int vitesse) {
+    // public VoitureAutonome()
+    // {
+    //     this.vitesse = 1;
+    //     // Point[] beginPosition = new Point[] {
+    //     //     new Point(6,0), 
+    //     //     new Point(14,0),
+    //     //     new Point(0,5), 
+    //     //     new Point(18,6),
+    //     //     new Point(18,14),
+    //     //     new Point(0,13),
+    //     //     new Point(5,18)
+    //     // };
+
+    //     Random rand = new Random();
+    //     int nombreAleatoire = rand.nextInt(7) ; // Génère un nombre aléatoire entre 0 et 7
+
+    //     if (nombreAleatoire == 0){position = beginPosition[0]; direction = 1;}    //1:bas 2:gauche 3:haut 4:droite
+    //     else if (nombreAleatoire == 1){position = beginPosition[1]; direction = 1;}
+    //     else if (nombreAleatoire == 2){position = beginPosition[2]; direction = 0;}
+    //     else if (nombreAleatoire == 3){position = beginPosition[3]; direction = 2;}
+    //     else if (nombreAleatoire == 4){position = beginPosition[4]; direction = 2;}
+    //     else if (nombreAleatoire == 5){position = beginPosition[5]; direction = 0;}
+    //     else {position = beginPosition[6]; direction = 3;}  
+    // }
+    
+    public VoitureAutonome(int x, int y, int direction, int vitesse) {
         position = new Point(x, y);
         this.direction = direction;
         this.vitesse = vitesse;
@@ -31,10 +44,10 @@ public class VoitureAutonome {
     public void setPosition(Point position) {
         this.position = position;
     }
-    public Vector<Integer> getDirection() {
+    public int getDirection() {
         return direction;
     }
-    public void setDirection(Vector<Integer> direction) {
+    public void setDirection(int direction) {
         this.direction = direction;
     }
     public int getVitesse() {
@@ -45,7 +58,7 @@ public class VoitureAutonome {
     }
     public void Deplacement(int vitesse) {
         int dx = 0, dy = 0;
-        switch (direction.get(0)) {
+        switch (direction) {
             case 0:
                 dx = vitesse;
                 break;
@@ -62,15 +75,14 @@ public class VoitureAutonome {
         position.translate(dx, dy);
     }
 
-    public void changeDirection(Point nouvellePosition, Vector<Integer> nouvelleDirection) {
-        position = nouvellePosition;
+    public void changeDirection(int nouvelleDirection) {
         direction = nouvelleDirection;
     }
 
     public Point calculeNouvellePosition() {
         Point nouvellePosition = new Point(position);
         int dx = 0, dy = 0;
-        switch (direction.get(0)) {
+        switch (direction) {
             case 0:
                 dx = 1;
                 break;
@@ -87,23 +99,6 @@ public class VoitureAutonome {
         nouvellePosition.translate(dx, dy);
         return nouvellePosition;
     }
-    // public void Deplacement(int direction) // direction = 1 = est
-    // {
-    //     if (direction == 0) {
-    //         position.y=position.y + 1;
-    //     }
-    //     if (direction == 1)
-    //     {
-    //         position.x=position.x + 1;
-    //     }
-    //     if (direction == 2){
-    //         position.y = position.y - 1;
-    //     }
-    //     if (direction == 3){
-    //         position.x = position.x + 1;
-    //     }
-        
-    // }
   
     // public void changerDirection(Point nouvellePosition, Vector<Integer> nouvelleDirection) {
     //     position = nouvellePosition;
@@ -125,5 +120,17 @@ public class VoitureAutonome {
     //     }
     //     return new Point(x, y);
     // }
-    
+
+    public boolean checkCollisionAvecIntersection(Intersection[] intersections) {
+        for(int i = 0; i < 4; i++) {
+           Vector<Point> points = intersections[i].getPosition();
+
+            for (int j = 0; j < 4; j++) {            
+                if (this.position.x == points.get(j).x && this.position.y == points.get(j).y){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

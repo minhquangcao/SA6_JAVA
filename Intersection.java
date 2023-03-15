@@ -69,4 +69,5 @@ public class Intersection {
         position.add(new Point(x + 1, y - 1));
         position.add(new Point(x, y - 1));
     }
+    
 }

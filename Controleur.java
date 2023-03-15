@@ -1,7 +1,11 @@
-/*public class Controleur {
+// public class Controleur {
 
-    public void askPermission(Voiture m[])
-    {}
-    private void controleTrafic(Commande c[]){}
-}
-*/
+//     public void askPermission(Voiture m[])
+//     {}
+//     private void controleTrafic(Commande c[]){}
+
+//     public compterVoiture(){
+
+//     }
+// }
+
